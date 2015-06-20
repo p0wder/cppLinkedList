@@ -4,6 +4,7 @@
 
 /**
 * Author: Scott Gramig
+* Referenced: Ali Nawkhas Murad
 * Program: Doubly LinkedList implementation
 **/
 

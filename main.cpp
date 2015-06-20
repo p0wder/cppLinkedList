@@ -42,6 +42,7 @@ class doublyLinkedList
             head = NULL;                         // initiate the head and tail to NULL because the LinkedList is empty right now
             tail = NULL;
         }
+        ~doublyLinkedList();
         void destroyLinkedList();
         void appendNodehead(double x);          // add node to head of linked list
         void appendNodetail(double x);          // add node to tail of linked list
@@ -91,7 +92,12 @@ void doublyLinkedList::appendNodetail(double x)
 **/
 void doublyLinkedList::dispNodesForward()
 {
-    Node *temp = head;                              // create temporary Node to start at the head of the list
+    Node *temp = head;
+    if(head == NULL)
+    {
+        cout << "\nLinked List is empty!!!" << endl;
+        return;
+    }                            // create temporary Node to start at the head of the list
     cout << "\n\nNodes in forward order: " << endl;
     while(temp != NULL)                            // while there are Nodes in the LinkedList continue
     {
@@ -105,7 +111,12 @@ void doublyLinkedList::dispNodesForward()
 **/
 void doublyLinkedList::dispNodeReverse()
 {
-    Node *temp = tail;                              // same as printing forward method but starting at the tail
+    Node *temp = tail;
+    if(head == NULL)
+    {
+        cout << "\nLinked List is empty!!!" << endl;
+        return;
+    }                             // same as printing forward method but starting at the tail
     cout << "\n\nNodes in reverse order: " << endl;
     while(temp != NULL)
     {
@@ -121,6 +132,11 @@ void doublyLinkedList::removeNode(double x)
 {
     Node *tempPre = NULL, *tempDel = NULL, *tempNext = NULL;
 
+    if(head == NULL)
+    {
+        cout << "\nLinked List is empty!!!" << endl;
+        return;
+    }
     // check if it is head node
     if(head->data == x)
     {
@@ -151,7 +167,13 @@ void doublyLinkedList::removeNode(double x)
         tempDel = tempDel->next;                // the linked list
     }
 }
-
+/**
+* destructor for doublyLinkedList
+**/
+doublyLinkedList::~doublyLinkedList()
+{
+    destroyLinkedList();
+}
 void doublyLinkedList::destroyLinkedList()
 {
     Node *T = tail;
@@ -187,7 +209,7 @@ int main()
     list->dispNodeReverse();
 
     cout << "\n\nClearing LinkedList from memory....";
-    list->destroyLinkedList();
+    list->~doublyLinkedList();
     list->dispNodesForward();
 
     return 0;

@@ -42,6 +42,7 @@ class doublyLinkedList
             head = NULL;                         // initiate the head and tail to NULL because the LinkedList is empty right now
             tail = NULL;
         }
+        void destroyLinkedList();
         void appendNodehead(double x);          // add node to head of linked list
         void appendNodetail(double x);          // add node to tail of linked list
         void dispNodesForward();                 // display nodes in forward order
@@ -151,6 +152,19 @@ void doublyLinkedList::removeNode(double x)
     }
 }
 
+void doublyLinkedList::destroyLinkedList()
+{
+    Node *T = tail;
+    while(T != NULL)
+    {
+        Node *T2 = T;
+        T = T->pre;
+        delete T2;
+    }
+    head = NULL;
+    tail = NULL;
+}
+
 
 
 int main()
@@ -171,6 +185,10 @@ int main()
     list->removeNode(2);
     list->dispNodesForward();
     list->dispNodeReverse();
+
+    cout << "\n\nClearing LinkedList from memory....";
+    list->destroyLinkedList();
+    list->dispNodesForward();
 
     return 0;
 }
